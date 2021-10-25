@@ -174,7 +174,8 @@ const ListItem = ({ pool, modal, setModal }) => {
           [classes.accordionContainer]: action?.actionType === "Details",
         })}
         onChanged={onChangedExpanded}
-        expandMoreIcon={
+      >
+        <CustomAccordion.ExpandMoreIcon>
           <CompoundActionButton
             type={action?.actionType}
             action={action?.func}
@@ -182,11 +183,11 @@ const ListItem = ({ pool, modal, setModal }) => {
             setUserData={setUserData}
             item={pool}
           />
-        }
-        summary={
+        </CustomAccordion.ExpandMoreIcon>
+        <CustomAccordion.Summary>
           <DetailItem item={pool} userBoost={userBoost} totalAPY={totalAPY} />
-        }
-        details={
+        </CustomAccordion.Summary>
+        <CustomAccordion.Details>
           <CompoundListDetail
             item={pool}
             userData={userData}
@@ -196,8 +197,10 @@ const ListItem = ({ pool, modal, setModal }) => {
             userBoost={userBoost}
             totalAPY={totalAPY}
           />
-        }
-      />
+        </CustomAccordion.Details>
+      </CustomAccordion>
+
+
       {modal.open && pool.address === modal.address && (
         <CompoundDialogs
           open={modal.open}
