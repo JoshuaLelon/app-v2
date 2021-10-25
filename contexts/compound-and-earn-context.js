@@ -26,7 +26,7 @@ const CompoundAndEarnContext = createContext(null);
 
 export function CompoundAndEarnProvider({ children }) {
   const { library, account } = useWeb3React();
-  const { gauges, retrieveGauge, getBalanceInfo, getGaugeProxyInfo, setGaugeCalls } = useContracts();
+  const { gauges, retrieveGauge, getBalanceInfo, getGaugeProxyInfo } = useContracts();
   const { getLastSnowballInfo, getDeprecatedContracts } = useAPIContext();
   const { provider } = useProvider();
   const { prices } = usePrices();
@@ -76,7 +76,7 @@ export function CompoundAndEarnProvider({ children }) {
         const deprecatedUserBalance = [];
         deprecatedContracts.forEach(pool => {
           const deprecatedInfo = generateDeprecatedInfo(pool, deprecatedData);
-          if(deprecatedInfo){
+          if (deprecatedInfo) {
             deprecatedUserBalance.push(deprecatedInfo);
           }
         });
@@ -278,10 +278,10 @@ export function CompoundAndEarnProvider({ children }) {
             console.log(error);
             useExact = true;
           })
-          const approval = await contract.approve(spender, 
-            useExact 
-            ? ethers.constants.MaxUint256 
-            : amount);
+          const approval = await contract.approve(spender,
+            useExact
+              ? ethers.constants.MaxUint256
+              : amount);
           const transactionApprove = await approval.wait(1);
           if (!transactionApprove.status) {
             setPopUp({
